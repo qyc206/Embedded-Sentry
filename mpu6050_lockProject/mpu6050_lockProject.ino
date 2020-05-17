@@ -26,7 +26,7 @@ float yArr[arrSize]; // y filter
 float zArr[arrSize]; // z filter
 
 float xCenter, yCenter, zCenter; // x, y, and z for neutral position
-const float threshold = 0.25; // threshold set for x, y, z boundaries
+const float threshold = 0.2; // threshold set for x, y, z boundaries
 
 
 // SET UP FOR RECORDING MOVEMENTS TO USE WHEN ATTEMPTING TO UNLOCK
@@ -163,7 +163,6 @@ bool recordMovements(int type){
       // skip if neutral (no movement detected)
       if ((abs(deltaX) < threshold && abs(deltaX) > -1*threshold) && (abs(deltaY) < threshold && abs(deltaY) > -1*threshold) && 
             (abs(deltaZ) < threshold && abs(deltaZ) > -1*threshold)){
-        Serial.println("Waiting..");
         break;
       }
   
@@ -291,21 +290,22 @@ void setup() {
 
   // prompt user on how they can reset the sequence 
   Serial.println("If unhappy with combo, reset by flipping");
-  delay(500);
+  delay(1000);
   reset(3); // update position of accelerometer
   
   while (zCenter < 0){ // if user wants to reset the lock sequence
+    Serial.println("");
     reset(0);
     recordMovements(0);
 
     // prompt user on how they can reset the sequence 
     Serial.println("If unhappy with combo, reset by flipping");
-    delay(500);
+    delay(1000);
     reset(3); // update position of accelerometer
   }
 
-  Serial.println("Seems like you are happy; BEGIN UNLOCKING ATTEMPTS\n");
-  delay(1000);
+  Serial.println("\nSeems like you are happy; BEGIN UNLOCKING ATTEMPTS\n");
+  delay(500);
 }
 
 void loop() {
@@ -317,10 +317,9 @@ void loop() {
     }
     else if (!correctCombo){
       Serial.println("FAILED TO UNLOCK: wrong combo");
+      Serial.println("Flip if you want to try unlocking again");
       while (!correctCombo){ // while attempt failed, prompt user on how they can try again
-        Serial.println("Flip if you want to try unlocking again");
         reset(3); // update position of accelerometer 
-        delay(500);
         if (zCenter < 0){ // if accelerometer is flipped over
           Serial.println("");
           reset(0); // reset position of accelerometer
