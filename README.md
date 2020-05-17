@@ -9,7 +9,7 @@ Using Arduino Uno and an accelerometer (MPU-6050), detect and record a sequence 
 
 Currently, the project objective has been achieved. However, there remains inaccuracies in motion detection using the accelerometer. It is noticed that the accelerometer would have random moments where it detects the opposite of the intended motion which adds to the inaccuracy. Another cause for the inacurracy is the sensitivity of the accelerometer and human error; it is noticed that sometimes the slightest quick (and unintended) motions of the hand that is holding the accelerometer is captured and recorded. Currently, these inaccuracies are unsolved; however, movements that are captured are displayed, and if it is incorrect or unintended, the user can reset and start over their movement sequence. 
 
-[Click here to view a demo!](https://youtu.be/jo67cZooJHM)
+[Click here to view a demo!](https://youtu.be/WAnl7tRjdRk)
 
 ## Library Dependencies 
 
